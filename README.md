@@ -2,6 +2,10 @@
 # Projet Quai Antique
 
 Pour déployer cet application en local il vous suffit d'utiliser tous les informations ci-dessous.
+Assurez-vous d'avoir tout le nécéssaire pour ce projet.
+- PHP 7.1 ou version ultérieure
+- MySQL ou un autre serveur de base de données compatible avec Symfony, je recommande vivement [Laragon](https://laragon.org/)
+- Composer
 
 
 
