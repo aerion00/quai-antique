@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quai Antique | Page d'acceuil{% endblock %}
+
+{% block body %}
+    <div class="row">
+
+        <div class="row">
+            <h1>Bienvenue sur le site du Quai Antique</h1>
+
+            <p class="lead mt-3">Situé dans la ville historique de Chambéry, Le Quai Antique est un restaurant gastronomique qui propose une expérience culinaire inoubliable. Notre chef passionné crée des plats exceptionnels à partir d'ingrédients frais et locaux, en utilisant des techniques culinaires traditionnelles et innovantes pour donner vie à des saveurs et des textures uniques.</p>
+
+
+            <h2>Nos produits locaux</h2>
+
+            <div class="hover14 column">
+
+                {% for photo in gallery %}
+                <div class="mb-5">
+                    <figure><img class="w-100 rounded" src="/uploads/{{ photo.photo }}" /></figure>
+                    <span>{{ photo.name }}</span>
+                </div>
+                {% endfor %}
+
+            </div>
+
+            <div class="row d-flex justify-content-center">
+            <a class="text-decoration-none d-flex justify-content-center" href="{{ path('app_booking') }}"><button type="button" class="text-center w-25 btn btn-success">Réserver pour vous ou votre régiment</button></a>
+            </div>
+
+        </div>
+
+        <div class="row d-flex justify-content-center">
+
+            <h1 id="menu" class="mt-5">Notre menu</h1>
+
+            <p class="lead">Nous sommes ravis de vous annoncer que nos délicieux menus sont maintenant disponibles à n'importe quelle heure de service ! Que vous soyez un lève-tôt ou un noctambule, vous pourrez profiter de notre cuisine raffinée à tout moment de la journée.</p>
+
+            {% for menu in menus %}
+            <div class="card col-md-4 m-5">
+                <div class="card-body">
+                    <h2>{{ menu.name }}<span class="text-muted">{{ menu.price }} PO</span></h2>
+                    <ul class="list-group list-group-flush">
+                        {% for dishe in menu.products %}
+                        <li class="list-group-item">{{ dishe.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endfor %}
+
+            <h1 class="mt-5">Un décor d'exception</h1>
+
+            <p class="lead">
+                Avec une vue imprenable sur la ville historique de Chambéry, Le Quai Antique offre une expérience culinaire qui comblera tous les amateurs de gastronomie. Nous avons hâte de vous accueillir pour une soirée inoubliable dans notre restaurant.
+            </p>
+
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2878.009168144939!2d4.357425915768353!3d43.83490784867924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b42d099c473107%3A0x27a2fad19108940f!2zQXLDqG5lcyBkZSBOw65tZXM!5e0!3m2!1sfr!2sfr!4v1676800948019!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+        </div>
+
+
+
+    </div>
+
+{% endblock %}

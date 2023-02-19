@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quai Antique - Réservation (étape 2){% endblock %}
+
+{% block body %}
+    <div class="row">
+
+            {% if newBooking.step is null %}
+
+                {% if app.user %}
+
+                {% else %}
+                    <div class="alert alert-primary" role="alert">
+                        Si vous avez déjà un espace membre, n'hésitez pas à vous connecter, pour que vos informations courantes soient rajoutées automatiquement au formulaire.<br>
+                        Connectez-vous en cliquant juste <a href="{{ path('app_login') }}">ici</a>.
+                    </div>
+                {% endif %}
+
+                <h1>Réservation</h1>
+                <p class="lead">Bonjour {% if app.user %}{{ app.user.name }}{% endif %}, merci de choisir votre jour de réservation.</p>
+
+                {{ form_start(firstStepBooking) }}
+
+                {{ form_label(firstStepBooking.date) }}
+
+                {{ form_widget(firstStepBooking.date, { 'attr': {'class': 'datepicker'} }) }}
+
+                <br>
+
+                {{ form_end(firstStepBooking) }}
+
+            {% endif %}
+
+            {% if newBooking.step == 2 %}
+
+                <h1>Réservation du {{ newBooking.date|date("d/m/Y") }}</h1>
+
+                {% if (bookingDay == 'Monday' and shopParameters.OpenMon) or (bookingDay == 'Tuesday' and shopParameters.OpenThu) or (bookingDay == 'Wednesday' and shopParameters.OpenWed) or (bookingDay == 'Thursday' and shopParameters.OpenThur) or (bookingDay == 'Friday' and shopParameters.OpenFri) or (bookingDay == 'Saturday' and shopParameters.OpenSat) or (bookingDay == 'Sunday' and shopParameters.OpenSun)  %}
+
+                <p class="lead">Veuillez choisir le moment auquel vous souhaitez réserver.</p>
+
+                    {{ form_start(secondStepBooking) }}
+
+                    {{ form_label(secondStepBooking.moment, 'Choix du service') }}
+                        {{ form_row(secondStepBooking.moment) }}
+
+                    {{ form_label(secondStepBooking.numberOfPeople, 'Nombre de viking (places)') }}
+                        {{ form_row(secondStepBooking.numberOfPeople) }}
+
+                    {{ form_end(secondStepBooking) }}
+
+                <p class="small">Il reste {{shopParameters.numberOfPlacesLunch - bookingOfDayMidi|length }} places disponibles sur le service du midi et {{shopParameters.numberOfPlacesDinner - bookingOfDaySoir|length }} places sur le service du soir.</p>
+
+
+            {% elseif dateBookingTry < date() %}
+
+                <div class="alert alert-danger" role="alert">
+                    Merci de sélectionner une date correcte. L'équipe du restaurant ne conduit pas une DeLorean 😛
+                    Retourner à la réservation en cliquant <a href="{{ path('app_booking') }}">ici</a>.
+                </div>
+
+            {% else %}
+
+                        <div class="alert alert-danger" role="alert">
+                            Le restaurant n'est pas ouvert à cette date.
+                            Retourner à la réservation en cliquant <a href="{{ path('app_booking') }}">ici</a>.
+                        </div>
+
+                    {% endif %}
+
+            {% endif %}
+
+            {% if newBooking.step == 3 %}
+                <h1>Réservation du {{ newBooking.date|date("m/d/Y") }} ({{ newBooking.moment }})</h1>
+
+                {% if app.user %}
+
+                    {{ form_start(fourthStepBooking) }}
+
+                    {{ form_row(fourthStepBooking.user) }}
+
+                        {{ form_row(fourthStepBooking.infos) }}
+
+                        {{ form_row(fourthStepBooking.hour) }}
+
+                        {{ form_row(fourthStepBooking.submit) }}
+
+                        {{ form_end(fourthStepBooking) }}
+
+                {% else %}
+
+                    {{ form_start(thirdStepBooking) }}
+
+                    {{ form_row(thirdStepBooking.nameBooking) }}
+
+                    {{ form_row(thirdStepBooking.infos) }}
+
+                    {{ form_row(thirdStepBooking.hour) }}
+
+                    {{ form_row(thirdStepBooking.submit) }}
+
+                    {{ form_end(thirdStepBooking) }}
+
+                {% endif %}
+
+            {% endif %}
+
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $('#datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            startDate: 'today',
+            endDate: '2022-12-31'
+        });
+    </script>
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

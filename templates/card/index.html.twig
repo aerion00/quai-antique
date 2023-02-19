@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quai Antique | La carte{% endblock %}
+
+{% block body %}
+
+<div class="row">
+
+    <h1 id="carte" class="mt-1">Notre carte</h1>
+    <p class="lead">
+        Notre menu comprend une variété de plats traditionnels tels que le poulet rôti à la sauge, un plat de viande tendre et juteuse qui fond dans la bouche et qui est assaisonné avec des herbes fraîches. Ou encore, notre fameux ragoût de bœuf à la bière, un plat copieux et réconfortant qui réchauffe l'âme et apaise l'estomac.
+
+        Si vous préférez les légumes, nous avons également des options pour vous. Notre pottage de légumes est une soupe épaisse et riche en saveurs, remplie de légumes frais, d'herbes aromatiques et de viande hachée pour une expérience gustative complète.
+
+        Pour accompagner ces délicieux plats, nous proposons une sélection de pain d'épices, de tourtes aux pommes de terre et de carottes glacées au miel qui apporteront une touche sucrée à votre repas.
+
+        Enfin, pour terminer votre repas en beauté, nous avons préparé des desserts tels que la tarte aux pommes, une pâtisserie traditionnelle remplie de pommes sucrées et d'épices, ou le pouding de riz, un dessert crémeux et doux qui vous laissera avec une envie de plus.
+
+        Nous espérons que vous apprécierez notre cuisine médiévale et que vous passerez un moment agréable dans notre restaurant. Merci de votre visite et bon appétit !
+    </p>
+
+    <div class="card col-md-3 m-3">
+        <div class="card-body">
+
+            <h2>Entrées</h2>
+            <ul class="list-group list-group-flush">
+                {% for product in productsEntry %}
+                    <li class="list-group-item"><b>{{ product.name }}</b> <span class="text-muted">{{ product.price }} PO</span>
+                        <br>
+                        {{ product.description }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="card col-md-3 m-3">
+        <div class="card-body">
+
+            <h2>Accompagnements</h2>
+            <ul class="list-group list-group-flush">
+                {% for product in productsAccompaniments %}
+                    <li class="list-group-item"><b>{{ product.name }}</b> <span class="text-muted">{{ product.price }} PO</span>
+                        <br>
+                        {{ product.description }}
+                    </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="card col-md-3 m-3">
+        <div class="card-body">
+
+            <h2>Plat principal</h2>
+            <ul class="list-group list-group-flush">
+                {% for product in productsMain %}
+                    <li class="list-group-item"><b>{{ product.name }}</b> <span class="text-muted">{{ product.price }} PO</span>
+                        <br>
+                        {{ product.description }}
+                    </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="card col-md-3 m-3">
+        <div class="card-body">
+
+            <h2>Desserts</h2>
+            <ul class="list-group list-group-flush">
+                {% for product in productsDesserts %}
+                    <li class="list-group-item"><b>{{ product.name }}</b> <span class="text-muted">{{ product.price }} PO</span>
+                        <br>
+                        {{ product.description }}
+                    </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="card col-md-3 m-3">
+        <div class="card-body">
+
+            <h2>Drink</h2>
+            <ul class="list-group list-group-flush">
+                {% for product in productsDrink %}
+                    <li class="list-group-item"><b>{{ product.name }}</b> <span class="text-muted">{{ product.price }} PO</span>
+                        <br>
+                        {{ product.description }}
+                    </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quai Antique | Mon compte{% endblock %}
+
+{% block body %}
+<div class="row">
+
+    {% for flash in app.flashes('success') %}
+        <div class="alert alert-success">{{ flash }}</div>
+    {% endfor %}
+
+    <h1>Mon compte</h1>
+    <p class="lead">Bienvenue sur votre compte utilisateur.</p>
+
+    <div class="row">
+
+        <p>
+
+        <button class="btn btn-sm btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Informations allergènes
+        </button>
+
+        <button class="btn btn-sm btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+            Mes réservations
+        </button>
+
+        </p>
+
+        <div class="collapse" id="collapseExample">
+            <div class="card-body">
+                {{ form_start(form) }}
+
+                {{ form_row(form.allergy, {
+                    label: 'Informations relatives aux alergies des membres du groupe' })
+                }}
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+        <div class="collapse" id="collapseExample2">
+            <div class="card-body">
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="col-1">Date</th>
+                        <th scope="col" class="col-2 text-center">Heure réservation</th>
+                        <th scope="col" class="col-2 text-center">Nombre de place</th>
+                        <th scope="col">Informations</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for booking in bookingsUser  %}
+                        <tr>
+                            <th scope="row"><span class="badge {% if booking.date < date() %}text-bg-secondary {% else %} text-bg-success {% endif %}">{{ booking.date|date("d/m/Y") }}</span></th>
+                            <td class="text-center">{{ booking.hour }}</td>
+                            <td class="text-center">{{ booking.numberOfPeople }}</td>
+                            <td class="">{{ booking.infos }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+{% endblock %}
