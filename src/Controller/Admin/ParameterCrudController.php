@@ -7,6 +7,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 
 class ParameterCrudController extends AbstractCrudController
 {
@@ -31,14 +34,30 @@ class ParameterCrudController extends AbstractCrudController
         return Parameter::class;
     }
 
-    /*
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            BooleanField::new('openMon')
+                ->setLabel('Lundi'),
+            BooleanField::new('openThu')
+                ->setLabel('Mardi'),
+            BooleanField::new('openWed')
+                ->setLabel('Mercredi'),
+            BooleanField::new('openThur')
+                ->setLabel('Jeu'),
+            BooleanField::new('openFri')
+                ->setLabel('Vendredi'),
+            BooleanField::new('openSat')
+                ->setLabel('Samedi'),
+            BooleanField::new('openMon')
+                ->setLabel('Dimanche'),
+            IntegerField::new('numberOfPlacesLunch')
+                ->setLabel('Places déjeuner'),
+            IntegerField::new('numberOfPlacesDinner')
+                ->setLabel('Places dinner'),
+            TextareaField::new('scheduleCms')
+                ->setLabel('Horaires sur le site')
         ];
     }
-    */
+
 }

@@ -47,15 +47,22 @@ class BookingController extends AbstractController
             return $this->redirectToRoute('app_booking2'); // rediriger vers le deuxième formulaire
         }
 
+        // Les horaires sur la homepage et la carte
+        $openDay = $this->entityManager->getRepository(parameter::class)->findById('1');
+
         return $this->render('booking/index.html.twig', [
             'newBooking' => $booking,
             'firstStepBooking' => $form->createView(),
+            'parameters' => $openDay
         ]);
     }
 
     #[Route('/reservation-etape-2', name: 'app_booking2')]
     public function indexStep2(Request $request, SessionInterface $session): Response
     {
+
+        // Les horaires sur la homepage et la carte
+        $openDay = $this->entityManager->getRepository(parameter::class)->findById('1');
 
         // Récupération des données de la session.
         $data = $session->get('booking');
@@ -121,6 +128,7 @@ class BookingController extends AbstractController
             'bookingOfDaySoir' => $numberBookingSoirDate,
             'bookingDay' => $dayOfBooking,
             'dateBookingTry' => $dayBooking,
+            'parameters' => $openDay
         ]);
 
     }
@@ -128,6 +136,9 @@ class BookingController extends AbstractController
     #[Route('/reservation-etape-3', name: 'app_booking3')]
     public function indexStep3(Request $request, SessionInterface $session): Response
     {
+
+        // Les horaires sur la homepage et la carte
+        $openDay = $this->entityManager->getRepository(parameter::class)->findById('1');
 
         $data = $session->get('booking'); // récupérer les données de la session
         $booking = new Booking(); // créer un nouvel objet Booking
@@ -183,12 +194,14 @@ class BookingController extends AbstractController
                 'newBooking' => $booking,
                 'thirdStepBooking' => $form3->createView(),
                 'fourthStepBooking' => $form4->createView(),
+                'parameters' => $openDay
             ]);
 
         } else {
             return $this->render('booking/index.html.twig', [
                 'newBooking' => $booking,
                 'thirdStepBooking' => $form3->createView(),
+                'parameters' => $openDay
             ]);
         }
 

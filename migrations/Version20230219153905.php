@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230109145523 extends AbstractMigration
+final class Version20230219153905 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,12 +20,12 @@ final class Version20230109145523 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE parameters (id INT AUTO_INCREMENT NOT NULL, open_mon TINYINT(1) NOT NULL, open_thu TINYINT(1) NOT NULL, open_wed TINYINT(1) NOT NULL, open_thur TINYINT(1) NOT NULL, open_fri TINYINT(1) NOT NULL, open_sat TINYINT(1) NOT NULL, open_sun TINYINT(1) NOT NULL, number_of_places INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE user DROP is_verified');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP TABLE parameters');
+        $this->addSql('ALTER TABLE user ADD is_verified TINYINT(1) NOT NULL');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ParameterRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ParameterRepository::class)]
@@ -39,6 +40,9 @@ class Parameter
 
     #[ORM\Column]
     private ?int $numberOfPlacesDinner = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $scheduleCms = null;
 
     public function getId(): ?int
     {
@@ -149,6 +153,18 @@ class Parameter
     public function setNumberOfPlacesDinner(int $numberOfPlacesDinner): self
     {
         $this->numberOfPlacesDinner = $numberOfPlacesDinner;
+
+        return $this;
+    }
+
+    public function getScheduleCms(): ?string
+    {
+        return $this->scheduleCms;
+    }
+
+    public function setScheduleCms(?string $scheduleCms): self
+    {
+        $this->scheduleCms = $scheduleCms;
 
         return $this;
     }

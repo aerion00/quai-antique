@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Parameter;
 use App\Entity\product;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,12 +31,16 @@ class CardController extends AbstractController
         $productDesserts = $this->entityManager->getRepository(product::class)->getProductByType($desserts);
         $productDrink = $this->entityManager->getRepository(product::class)->getProductByType($drink);
 
+        // Les horaires sur la homepage et la carte
+        $openDay = $this->entityManager->getRepository(parameter::class)->findById('1');
+
         return $this->render('card/index.html.twig', [
             'productsEntry' => $productEntry,
             'productsMain' => $productMain,
             'productsAccompaniments' => $productsAccompaniments,
             'productsDesserts' => $productDesserts,
             'productsDrink' => $productDrink,
+            'parameters' => $openDay
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Parameter;
 use App\Form\ChangeInfosType;
 use App\Repository\BookingRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,6 +25,9 @@ class AccountController extends AbstractController
     public function index(Request $request): Response
     {
 
+        // Les horaires sur la homepage et la carte
+        $openDay = $this->entityManager->getRepository(parameter::class)->findById('1');
+
         // Récupération du module pour modifier les informations sur les allergènes de l'utilisateur.
         $user = $this->getUser();
         $form = $this->createForm(ChangeInfosType::class, $user);
@@ -45,11 +49,14 @@ class AccountController extends AbstractController
         // Requête pour voir les réservations de l'utilisateur
 
         $bookingsUser = $this->booking->getBookingUser($user);
+        // Les horaires sur la homepage et la carte
+        $openDay = $this->entityManager->getRepository(parameter::class)->findById('1');
 
         return $this->render('account/index.html.twig', [
             'controller_name' => 'AccountController',
             'form' => $form->createView(),
-            'bookingsUser' => $bookingsUser
+            'bookingsUser' => $bookingsUser,
+            'parameters' => $openDay
         ]);
     }
 }

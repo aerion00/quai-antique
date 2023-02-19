@@ -56,16 +56,15 @@ class Booking3MemberStepType extends AbstractType
 
         if (isset($myUser)){
 
-            if ($myUser->getAllergy()) {
+            $allergy = $myUser->getAllergy();
+
+            $allergy = isset($allergy) ? $allergy : 'Souhaitez-vous nous communiquer quelque chose ? ';
+
                 $builder
                     ->add('infos', TextareaType::class, [
                         'label' => 'Informations allergènes du groupe',
-                        'data' => $myUser->getAllergy(),
+                        'data' => $allergy,
                     ]);
-
-            }
-
-        } else {
 
         }
 
