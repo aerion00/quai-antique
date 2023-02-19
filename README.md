@@ -26,4 +26,4 @@ $ php bin/console doctrine:schema:update --force
 
 Vous pouvez retrouver la version de ce site en ligne à l'adresse suivante :
 
-[www.takezo404.fr](https://www.google.com)
+[Juste-ici](http://s952347477.onlinehome.fr/)
